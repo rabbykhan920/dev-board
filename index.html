@@ -31,31 +31,60 @@
     </style>
 
 
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #000000;
+    --nav: #ffffff;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    transition: all 0.3s ease;
+  }
+</style>
+
+
+
 </head>
 <body class="font-inter bg-[#F4F7FF]">
     <!-- header -->
-    <header class="">
-        <section class="w-full bg-white shadow-sm px-8 py-4 flex items-center justify-between">
-    <div class="flex items-center gap-3"> 
-      <div class="">
-          <a href="index.html"> <img  src="img/logo.png" alt="logo"></a>
-    </div>
+   <header>
+  <section class="w-full bg-white shadow-sm px-8 py-4 flex items-center justify-between transition-all duration-300" id="navbar">
+    <div class="flex items-center gap-3">
+      <div>
+        <a href="index.html"><img src="img/logo.png" alt="logo"></a>
+      </div>
       <a href="index.html" class="md:text-3xl text-xl font-normal">Dev<span class="md:text-3xl text-xl font-bold">Board</span></a>
     </div>
 
     <div class="flex items-center gap-6">
       <div class="flex items-center gap-2">
         <img src="img/sign.png" alt="sign">
-        <span class="md:text-2xl text-xl font-bold ">23</span>
+        <span class="md:text-2xl text-xl font-bold">23</span>
       </div>
 
-      <div class="cursor-pointer">
-        <img src="img/colours.png" alt="">
-      </div>
+      <!-- Color Switcher Button -->
+      <div class="relative">
+        <img src="img/colours.png" alt="" class="cursor-pointer" id="themeBtn">
 
+        <!-- Dropdown Color Options -->
+        <div id="colorMenu"
+          class="hidden absolute right-0 mt-3 bg-white shadow-md rounded-xl p-3 flex flex-col gap-2 w-40">
+
+          <button class="p-2 rounded-md bg-[#1E90FF] text-white" onclick="changeTheme('blue')">Blue Theme</button>
+          <button class="p-2 rounded-md bg-[#6A5ACD] text-white" onclick="changeTheme('purple')">Purple Theme</button>
+          <button class="p-2 rounded-md bg-[#FF6347] text-white" onclick="changeTheme('red')">Red Theme</button>
+          <button class="p-2 rounded-md bg-[#2ECC71] text-white" onclick="changeTheme('green')">Green Theme</button>
+          <button class="p-2 rounded-md bg-[#000000] text-white" onclick="changeTheme('dark')">Dark Mode</button>
+          <button class="p-2 rounded-md bg-[#ffffff] border" onclick="changeTheme('light')">Light Theme</button>
+        </div>
+      </div>
     </div>
-    </section>
-  </header>
+  </section>
+</header>
+
 
     <!-- header -->
     <!-- main -->
@@ -86,27 +115,48 @@
 
 
         <!-- Discover Something New -->
-        <div class="bg-gradient-to-r from-[#3D57FD] to-[#97A5F8] rounded-xl p-6 text-white">
-          <div class="flex items-center gap-3">
-            <div class="">
-                <img src="img/calender.png" alt="calender">
-            </div>
-            <h2 class="text-lg font-semibold">Discover Something New Today!</h2>
-          </div>
+
+      <a href="faq.html" class="block">
+  <div class="bg-gradient-to-r from-[#3D57FD] to-[#97A5F8] rounded-xl p-6 text-white cursor-pointer">
+      <div class="flex items-center gap-3">
+        <div>
+            <img src="img/calender.png" alt="calender">
         </div>
+        <h2 class="text-lg font-semibold">Discover Something New Today!</h2>
+      </div>
+  </div>
+</a>
+
 
         <!-- Date Box -->
-        <div class="bg-[#F4F7FF] rounded-xl p-6 border ">
-          <div class="flex items-center gap-3">
-            <div class="md:p-4 p-2 bg-white rounded-full">
-                <img src="img/box.png" alt="">
-            </div>
-            <div>
-              <h3 class="md:text-xl font-semibold">Wed ,</h3>
-              <p class="md:text-xl font-bold ">Jul 28 2025</p>
-            </div>
-          </div>
-        </div>
+        <!-- Date Box -->
+<div class="bg-[#F4F7FF] rounded-xl p-6 border ">
+  <div class="flex items-center gap-3">
+      <div class="md:p-4 p-2 bg-white rounded-full">
+          <img src="img/box.png" alt="">
+      </div>
+      <div>
+        <h3 id="dayName" class="md:text-xl font-semibold"></h3>
+        <p id="fullDate" class="md:text-xl font-bold"></p>
+      </div>
+  </div>
+</div>
+
+<script>
+  const date = new Date();
+
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  const dayName = days[date.getDay()];
+  const monthName = months[date.getMonth()];
+  const day = date.getDate();
+  const year = date.getFullYear();
+
+  document.getElementById("dayName").textContent = `${dayName} ,`;
+  document.getElementById("fullDate").textContent = `${monthName} ${day} ${year}`;
+</script>
+
 
       </div>
 
@@ -115,7 +165,7 @@
 
         <!-- CARD COMPONENT -->
          <!-- card-1 -->
-        <div class="bg-[#F4F7FF] rounded-xl p-5">
+        <div class="task-card bg-[#F4F7FF] rounded-xl p-5">
     
     <span class="bg-white text-xs px-2 py-[4px] rounded">ShopEase</span>
 
@@ -141,7 +191,7 @@
         </div>
          <!-- card-1 -->
          <!-- card-2 -->
-       <div class="bg-[#F4F7FF] rounded-xl p-5">
+       <div class="task-card bg-[#F4F7FF] rounded-xl p-5">
     
     <span class="bg-white text-xs px-2 py-[4px] rounded">CloudSync</span>
 
@@ -167,7 +217,7 @@
         </div>
          <!-- card-2 -->
          <!-- card-3 -->         
-        <div class="bg-[#F4F7FF] rounded-xl p-5">
+        <div class="task-card bg-[#F4F7FF] rounded-xl p-5">
     
     <span class="bg-white text-xs px-2 py-[4px] rounded">SwiftPay</span>
 
@@ -193,7 +243,7 @@
         </div>
          <!-- card-3 -->
          <!-- card-4 -->
-        <div class="bg-[#F4F7FF] rounded-xl p-5">
+        <div class="task-card bg-[#F4F7FF] rounded-xl p-5">
     
     <span class="bg-white text-xs px-2 py-[4px] rounded">Meta</span>
 
@@ -219,7 +269,7 @@
         </div>
          <!-- card-4 -->
          <!-- card-5 -->
-        <div class="bg-[#F4F7FF] rounded-xl p-5">
+        <div class="task-card bg-[#F4F7FF] rounded-xl p-5">
     
     <span class="bg-white text-xs px-2 py-[4px] rounded">Google LLC</span>
 
@@ -245,7 +295,7 @@
         </div>
          <!-- card-5 -->
          <!-- card-6 -->
-       <div class="bg-[#F4F7FF] rounded-xl p-5">
+       <div class="task-card bg-[#F4F7FF] rounded-xl p-5">
     
     <span class="bg-white text-xs px-2 py-[4px] rounded">Glassdoar</span>
 
@@ -275,31 +325,25 @@
 
     </section>
 
-   <!-- RIGHT SIDE ACTIVITY LOG -->
+   <!-- Right Side Activity Log -->
 <section class="bg-white shadow-md rounded-xl p-6 border border-gray-100 h-full flex flex-col">
-
-    <!-- Top Section: Center everything -->
     <div class="flex items-center justify-center flex-col gap-3">
         <div class="flex items-center gap-2">
             <img src="img/repeat.png" alt="">
             <h2 class="text-lg font-semibold text-gray-800">Activity Log</h2>
         </div>
 
-        <button class="bg-blue-600 text-white px-4 py-1 rounded-lg text-sm">
+        <button id="clear-history" class="bg-blue-600 text-white px-4 py-1 rounded-lg text-sm">
             Clear History
         </button>
     </div>
 
-    <!-- Activity items (auto take leftover height) -->
-    <div class="mt-6 space-y-4 flex-1">
+    <!-- Add id here -->
+    <div id="activityLog" class="mt-6 space-y-4 flex-1">
+    </div>
+</section>
 
-        <div class="bg-gray-100 p-3 text-sm rounded-lg">
-            You have completed the task <b>Add Dark Mode</b> at 12:48:15 PM
-        </div>
-
-        <div class="bg-gray-100 p-3 text-sm rounded-lg">
-            You have completed the task <b>Optimize Home page</b> at 01:15:22 PM
-        </div>
+        
 
     </div>
 </section>
@@ -312,6 +356,67 @@
 
 
 
+<script>
+  // toggle dropdown
+  document.getElementById("themeBtn").addEventListener("click", () => {
+    document.getElementById("colorMenu").classList.toggle("hidden");
+  });
+
+  // Theme change function
+  function changeTheme(theme) {
+    let root = document.documentElement;
+
+    if (theme === "blue") {
+      root.style.setProperty("--bg", "#E8F1FF");
+      root.style.setProperty("--text", "#0B2A72");
+      root.style.setProperty("--nav", "#1E90FF");
+    }
+
+    if (theme === "purple") {
+      root.style.setProperty("--bg", "#F3E8FF");
+      root.style.setProperty("--text", "#4B0082");
+      root.style.setProperty("--nav", "#6A5ACD");
+    }
+
+    if (theme === "red") {
+      root.style.setProperty("--bg", "#FFE8E8");
+      root.style.setProperty("--text", "#8B0000");
+      root.style.setProperty("--nav", "#FF6347");
+    }
+
+    if (theme === "green") {
+      root.style.setProperty("--bg", "#E8FFF1");
+      root.style.setProperty("--text", "#0B6B34");
+      root.style.setProperty("--nav", "#2ECC71");
+    }
+
+    if (theme === "dark") {
+      root.style.setProperty("--bg", "#1E1E1E");
+      root.style.setProperty("--text", "#FFFFFF");
+      root.style.setProperty("--nav", "#000000");
+    }
+
+    if (theme === "light") {
+      root.style.setProperty("--bg", "#FFFFFF");
+      root.style.setProperty("--text", "#000000");
+      root.style.setProperty("--nav", "#ffffff");
+    }
+
+    // apply navbar colour
+    document.getElementById("navbar").style.backgroundColor = getComputedStyle(root).getPropertyValue("--nav");
+
+    // whole page background
+    document.body.style.backgroundColor = getComputedStyle(root).getPropertyValue("--bg");
+
+    // text colour change
+    document.body.style.color = getComputedStyle(root).getPropertyValue("--text");
+  }
+</script>
+
+
+
+ <script src="utillities.js"></script>
+ <script src="task.js"></script>
 
 </body>
 </html>
